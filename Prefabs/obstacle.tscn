@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://4ebwupsaob15"]
+
+[ext_resource type="Script" path="res://Obstacle.gd" id="1_rf63i"]
+[ext_resource type="Texture2D" uid="uid://kwbcnqxyxwn3" path="res://Sprites/falling_obstacle.png" id="2_bo8f7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n2tif"]
+size = Vector2(44, 45)
+
+[node name="Obstacle" type="Area2D" groups=["obstacle"]]
+script = ExtResource("1_rf63i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_bo8f7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_n2tif")

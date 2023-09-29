@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8o78257p22qw"]
+
+[ext_resource type="Script" path="res://PlayerController.gd" id="1_lr524"]
+[ext_resource type="Texture2D" uid="uid://m1f415k51l8x" path="res://Sprites/maculous.png" id="2_exqah"]
+[ext_resource type="PackedScene" uid="uid://euuniir2ck40" path="res://Prefabs/platform.tscn" id="2_r3bbs"]
+[ext_resource type="Script" path="res://GameManager.gd" id="3_i5jpe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7eow8"]
+size = Vector2(37, 11)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("3_i5jpe")
+
+[node name="ScreenMiddle" type="Node2D" parent="."]
+
+[node name="ScreenTop" type="Node2D" parent="ScreenMiddle"]
+position = Vector2(0, -325)
+
+[node name="ScreenLeft" type="Node2D" parent="ScreenMiddle"]
+position = Vector2(-200, 0)
+
+[node name="ScreenRight" type="Node2D" parent="ScreenMiddle"]
+position = Vector2(200, 0)
+
+[node name="ScreenBottom" type="Node2D" parent="ScreenMiddle"]
+position = Vector2(0, 325)
+
+[node name="Camera2D" type="Camera2D" parent="ScreenMiddle"]
+
+[node name="Platform" parent="." instance=ExtResource("2_r3bbs")]
+visible = false
+
+[node name="Player" type="Area2D" parent="."]
+gravity = 750.0
+script = ExtResource("1_lr524")
+jumpVelocity = -750.0
+xSpeed = 100.0
+gravity = 750.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("2_exqah")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-1.5, 24.5)
+shape = SubResource("RectangleShape2D_7eow8")

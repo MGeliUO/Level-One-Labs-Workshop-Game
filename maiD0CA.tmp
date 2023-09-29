@@ -1,0 +1,181 @@
+[gd_scene load_steps=12 format=3 uid="uid://c8o78257p22qw"]
+
+[ext_resource type="Script" path="res://PlayerController.gd" id="1_lr524"]
+[ext_resource type="Texture2D" uid="uid://m1f415k51l8x" path="res://Sprites/maculous.png" id="2_exqah"]
+[ext_resource type="PackedScene" uid="uid://euuniir2ck40" path="res://Prefabs/platform.tscn" id="2_r3bbs"]
+[ext_resource type="Script" path="res://GameManager.gd" id="3_i5jpe"]
+[ext_resource type="Texture2D" uid="uid://c8ml8v083tlux" path="res://Sprites/black_square.png" id="5_uaukp"]
+[ext_resource type="AudioStream" uid="uid://3t0bbaj41c72" path="res://Sound/jump_sound.wav" id="6_42y41"]
+[ext_resource type="AudioStream" uid="uid://bvmxg4n7q6ma5" path="res://Sound/music_track.mp3" id="7_icsso"]
+[ext_resource type="Texture2D" uid="uid://bxhhx73phkgta" path="res://Sprites/background.png" id="8_x61hs"]
+[ext_resource type="Texture2D" uid="uid://cnx634unixxvu" path="res://starting_floor.png" id="9_pbwx2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7eow8"]
+size = Vector2(37, 11)
+
+[sub_resource type="GDScript" id="GDScript_8yd6l"]
+script/source = "extends Sprite2D
+
+class_name LoopingBackground
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	
+	if (position.y)
+	
+	pass
+"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("3_i5jpe")
+
+[node name="ScreenMiddle" type="Node2D" parent="."]
+
+[node name="ScreenTop" type="Node2D" parent="ScreenMiddle"]
+position = Vector2(0, -324)
+
+[node name="ScreenLeft" type="Node2D" parent="ScreenMiddle"]
+position = Vector2(-200, 0)
+
+[node name="ScreenRight" type="Node2D" parent="ScreenMiddle"]
+position = Vector2(200, 0)
+
+[node name="ScreenBottom" type="Node2D" parent="ScreenMiddle"]
+position = Vector2(0, 324)
+
+[node name="Camera2D" type="Camera2D" parent="ScreenMiddle"]
+
+[node name="GameOverText" type="RichTextLabel" parent="ScreenMiddle"]
+visible = false
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = -20.0
+offset_right = 191.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.0156863, 0.0156863, 0.0156863, 1)
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "[center]GAME OVER"
+autowrap_mode = 0
+
+[node name="StartText2" type="RichTextLabel" parent="ScreenMiddle/GameOverText"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.0
+offset_top = -2.0
+offset_right = 193.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.0156863, 0.0156863, 0.0156863, 1)
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[center]Press space to try again!"
+autowrap_mode = 0
+
+[node name="StartText" type="RichTextLabel" parent="ScreenMiddle"]
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.0
+offset_top = 38.0
+offset_right = 189.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.0156863, 0.0156863, 0.0156863, 1)
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[center]Press space to start!"
+autowrap_mode = 0
+
+[node name="ScoreText" type="RichTextLabel" parent="ScreenMiddle"]
+z_index = 2
+offset_left = -194.0
+offset_top = -304.0
+offset_right = 113.0
+offset_bottom = -237.0
+theme_override_colors/default_color = Color(0.0156863, 0.0156863, 0.0156863, 1)
+theme_override_font_sizes/normal_font_size = 31
+bbcode_enabled = true
+text = "Score: 0"
+autowrap_mode = 0
+
+[node name="ScreenBorderLeft" type="Sprite2D" parent="ScreenMiddle"]
+z_index = 2
+position = Vector2(-455, -1.00002)
+scale = Vector2(1, 1.3125)
+texture = ExtResource("5_uaukp")
+
+[node name="ScreenBorderRight" type="Sprite2D" parent="ScreenMiddle"]
+z_index = 2
+position = Vector2(455, -1)
+scale = Vector2(1, 1.3125)
+texture = ExtResource("5_uaukp")
+
+[node name="Player" type="Area2D" parent="."]
+position = Vector2(0, 285)
+script = ExtResource("1_lr524")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+z_index = 1
+texture = ExtResource("2_exqah")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-1.5, 24.5)
+shape = SubResource("RectangleShape2D_7eow8")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("6_42y41")
+volume_db = -14.992
+
+[node name="Platform" parent="." instance=ExtResource("2_r3bbs")]
+visible = false
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_icsso")
+volume_db = -13.117
+autoplay = true
+
+[node name="LoopingBackground1" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-0.500003, 1.10269e-05)
+scale = Vector2(0.493842, 0.471273)
+texture = ExtResource("8_x61hs")
+script = SubResource("GDScript_8yd6l")
+
+[node name="LoopingBackground2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, -648)
+scale = Vector2(0.493842, 0.471273)
+texture = ExtResource("8_x61hs")
+
+[node name="Ground" type="Sprite2D" parent="."]
+position = Vector2(1, 13)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_pbwx2")
+
+[connection signal="area_entered" from="Player" to="Player" method="_on_area_entered"]
